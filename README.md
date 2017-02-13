@@ -2,7 +2,7 @@
 Prototype projet MADERA
 
 ## Ce que le prototype propose
-Ecrans à dev (voir [Wireframes](https://drive.google.com/drive/folders/0BwEXUygvGeHhMkFJNGJSUnFlSDQ) 
+Ecrans à dev (voir [Wireframes](https://drive.google.com/drive/folders/0BwEXUygvGeHhMkFJNGJSUnFlSDQ))
 
 ------
 + Création de devis
@@ -19,3 +19,8 @@ Listes des entités à utiliser (voir [Diagramme de classe](https://drive.google
 + Devis
 + Modèle
 + Commercial
+
+
+
+
+Lien du tuto: https://spring.io/guides/tutorials/react-and-spring-data-rest/
