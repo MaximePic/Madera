@@ -17,8 +17,8 @@ Lien du tuto: https://spring.io/guides/tutorials/react-and-spring-data-rest/
 + Installer Webpack
 
 ## Lancer le projet
-+ Run 'webpack' pour build
-+ Run './mvnw spring-boot:run' pour lancer l'appli
++ Run `webpack` pour build
++ Run `./mvnw spring-boot:run` pour lancer l'appli
 
 ## Ce que le prototype propose
 Ecrans à dev (voir [Wireframes](https://drive.google.com/drive/folders/0BwEXUygvGeHhMkFJNGJSUnFlSDQ))
