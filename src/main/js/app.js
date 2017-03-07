@@ -1,27 +1,13 @@
 'use strict';
 
-// tag::vars[]
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-import HomePage from './components/HomePage.js'
+import Login from './components/Login.js'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
-// end::vars[]
-
-// tag::accueil[]
-class Login extends React.Component {
-    render() {
-        return(
-            <HomePage />
-        )
-      }
-}
-//end:accueil[]
-
-// tag::render[]
+//Composant Login dans login.html
 ReactDOM.render(
     <Login />,
-    document.getElementById('accueil')
+    document.getElementById('loginForm')
 );
-// end::render[]

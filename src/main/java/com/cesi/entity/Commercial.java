@@ -11,15 +11,34 @@ import javax.persistence.Id;
 public class Commercial {
 
     private @Id @GeneratedValue Long id;
-    private String firstName;
-    private String lastName;
-    private String description;
+    private String nom;
+    private String prenom;
+    private String numero_rue;
+    private String nom_rue;
+    private String portbale;
+    private String fixe;
+    private String email;
+    private String login;
+    private String mot_passe;
+    private String ville_id;
+
+
 
     private Commercial() {}
 
-    public Commercial(String firstName, String lastName, String description) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
+
+    public Commercial(String nom, String prenom, String numero_rue, String nom_rue, String portbale, String fixe,
+                      String email, String login, String mot_passe, String ville_id) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.numero_rue = numero_rue;
+        this.nom_rue = nom_rue;
+        this.portbale = portbale;
+        this.fixe = fixe;
+        this.email = email;
+        this.login = login;
+        this.mot_passe = mot_passe;
+        this.ville_id = ville_id;
     }
 }
+//}

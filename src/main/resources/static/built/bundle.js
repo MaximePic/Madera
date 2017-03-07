@@ -46,55 +46,19 @@
 
 	'use strict';
 	
-	// tag::vars[]
+	var _Login = __webpack_require__(1);
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _HomePage = __webpack_require__(1);
-	
-	var _HomePage2 = _interopRequireDefault(_HomePage);
+	var _Login2 = _interopRequireDefault(_Login);
 	
 	var _reactRouter = __webpack_require__(184);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(33);
 	
-	// end::vars[]
-	
-	// tag::accueil[]
-	var Login = function (_React$Component) {
-	    _inherits(Login, _React$Component);
-	
-	    function Login() {
-	        _classCallCheck(this, Login);
-	
-	        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
-	    }
-	
-	    _createClass(Login, [{
-	        key: 'render',
-	        value: function render() {
-	            return React.createElement(_HomePage2.default, null);
-	        }
-	    }]);
-	
-	    return Login;
-	}(React.Component);
-	//end:accueil[]
-	
-	// tag::render[]
-	
-	
-	ReactDOM.render(React.createElement(Login, null), document.getElementById('accueil'));
-	// end::render[]
+	//Composant Login dans login.html
+	ReactDOM.render(React.createElement(_Login2.default, null), document.getElementById('loginForm'));
 
 /***/ },
 /* 1 */
@@ -103,7 +67,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -117,30 +81,36 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(33);
 	
-	var HomePage = function (_React$Component) {
-	  _inherits(HomePage, _React$Component);
+	var Login = function (_React$Component) {
+	    _inherits(Login, _React$Component);
 	
-	  function HomePage() {
-	    _classCallCheck(this, HomePage);
+	    function Login() {
+	        _classCallCheck(this, Login);
 	
-	    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
-	  }
-	
-	  _createClass(HomePage, [{
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'div',
-	        null,
-	        'Hello from react'
-	      );
+	        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
 	    }
-	  }]);
 	
-	  return HomePage;
+	    _createClass(Login, [{
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(
+	                'div',
+	                null,
+	                React.createElement('input', { type: 'text', placeholder: 'name', name: 'username' }),
+	                React.createElement('input', { type: 'password', placeholder: 'password', name: 'password' }),
+	                React.createElement(
+	                    'button',
+	                    { type: 'submit' },
+	                    'Login'
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Login;
 	}(React.Component);
 	
-	exports.default = HomePage;
+	exports.default = Login;
 
 /***/ },
 /* 2 */
