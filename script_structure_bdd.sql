@@ -25,8 +25,7 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`ville` (
   `nom` VARCHAR(100) NULL,
   `code_postal` VARCHAR(5) NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
-COMMENT = '										';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -45,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`commercial` (
   `mot_passe` VARCHAR(64) NULL,
   `ville_id` INT NOT NULL,
   PRIMARY KEY (`id`, `ville_id`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   INDEX `fk_commercial_ville1_idx` (`ville_id` ASC),
   CONSTRAINT `fk_commercial_ville1`
     FOREIGN KEY (`ville_id`)
@@ -94,19 +94,17 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`projet` (
   `date_creation` DATE NULL,
   `commercial_id` INT NOT NULL,
   `client_id` INT NOT NULL,
-  `client_commercial_id` INT NOT NULL,
-  `client_ville_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `commercial_id`, `client_id`, `client_commercial_id`, `client_ville_id`),
+  PRIMARY KEY (`id`, `commercial_id`, `client_id`),
   INDEX `fk_projet_commercial_idx` (`commercial_id` ASC),
-  INDEX `fk_projet_client1_idx` (`client_id` ASC, `client_commercial_id` ASC, `client_ville_id` ASC),
+  INDEX `fk_projet_client1_idx` (`client_id` ASC),
   CONSTRAINT `fk_projet_commercial`
     FOREIGN KEY (`commercial_id`)
     REFERENCES `db_madera`.`commercial` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_projet_client1`
-    FOREIGN KEY (`client_id` , `client_commercial_id` , `client_ville_id`)
-    REFERENCES `db_madera`.`client` (`id` , `commercial_id` , `ville_id`)
+    FOREIGN KEY (`client_id`)
+    REFERENCES `db_madera`.`client` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -164,24 +162,13 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`plan` (
   `nom` VARCHAR(100) NULL,
   `date_creation` DATE NULL,
   `projet_id` INT NOT NULL,
-  `projet_commercial_id` INT NOT NULL,
-  `projet_client_id` INT NOT NULL,
-  `projet_client_commercial_id` INT NOT NULL,
-  `projet_client_ville_id` INT NOT NULL,
-  `devis_id` INT NOT NULL,
   `modele_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `projet_id`, `projet_commercial_id`, `projet_client_id`, `projet_client_commercial_id`, `projet_client_ville_id`, `devis_id`, `modele_id`),
-  INDEX `fk_plan_projet1_idx` (`projet_id` ASC, `projet_commercial_id` ASC, `projet_client_id` ASC, `projet_client_commercial_id` ASC, `projet_client_ville_id` ASC),
-  INDEX `fk_plan_devis1_idx` (`devis_id` ASC),
+  PRIMARY KEY (`id`, `projet_id`, `modele_id`),
+  INDEX `fk_plan_projet1_idx` (`projet_id` ASC),
   INDEX `fk_plan_modele1_idx` (`modele_id` ASC),
   CONSTRAINT `fk_plan_projet1`
-    FOREIGN KEY (`projet_id` , `projet_commercial_id` , `projet_client_id` , `projet_client_commercial_id` , `projet_client_ville_id`)
-    REFERENCES `db_madera`.`projet` (`id` , `commercial_id` , `client_id` , `client_commercial_id` , `client_ville_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_plan_devis1`
-    FOREIGN KEY (`devis_id`)
-    REFERENCES `db_madera`.`devis` (`id`)
+    FOREIGN KEY (`projet_id`)
+    REFERENCES `db_madera`.`projet` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_plan_modele1`
@@ -189,8 +176,7 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`plan` (
     REFERENCES `db_madera`.`modele` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = '		';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -214,31 +200,9 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`module` (
   `nom` VARCHAR(45) NULL,
   `longueur` DOUBLE NULL,
   `prix_ht` DOUBLE NULL,
-  `plan_id` INT NOT NULL,
-  `plan_projet_id` INT NOT NULL,
-  `plan_projet_commercial_id` INT NOT NULL,
-  `plan_projet_client_id` INT NOT NULL,
-  `plan_projet_client_commercial_id` INT NOT NULL,
-  `plan_projet_client_ville_id` INT NOT NULL,
-  `plan_devis_id` INT NOT NULL,
-  `plan_modele_id` INT NOT NULL,
-  `modele_id` INT NOT NULL,
-  `modele_coupe_principe_id` INT NOT NULL,
   `gamme_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `plan_id`, `plan_projet_id`, `plan_projet_commercial_id`, `plan_projet_client_id`, `plan_projet_client_commercial_id`, `plan_projet_client_ville_id`, `plan_devis_id`, `plan_modele_id`, `modele_id`, `modele_coupe_principe_id`, `gamme_id`),
-  INDEX `fk_module_plan1_idx` (`plan_id` ASC, `plan_projet_id` ASC, `plan_projet_commercial_id` ASC, `plan_projet_client_id` ASC, `plan_projet_client_commercial_id` ASC, `plan_projet_client_ville_id` ASC, `plan_devis_id` ASC, `plan_modele_id` ASC),
-  INDEX `fk_module_modele1_idx` (`modele_id` ASC, `modele_coupe_principe_id` ASC),
+  PRIMARY KEY (`id`, `gamme_id`),
   INDEX `fk_module_gamme1_idx` (`gamme_id` ASC),
-  CONSTRAINT `fk_module_plan1`
-    FOREIGN KEY (`plan_id` , `plan_projet_id` , `plan_projet_commercial_id` , `plan_projet_client_id` , `plan_projet_client_commercial_id` , `plan_projet_client_ville_id` , `plan_devis_id` , `plan_modele_id`)
-    REFERENCES `db_madera`.`plan` (`id` , `projet_id` , `projet_commercial_id` , `projet_client_id` , `projet_client_commercial_id` , `projet_client_ville_id` , `devis_id` , `modele_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_module_modele1`
-    FOREIGN KEY (`modele_id` , `modele_coupe_principe_id`)
-    REFERENCES `db_madera`.`modele` (`id` , `coupe_principe_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_module_gamme1`
     FOREIGN KEY (`gamme_id`)
     REFERENCES `db_madera`.`gamme` (`id`)
@@ -255,24 +219,7 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`composant` (
   `nature` VARCHAR(45) NULL,
   `caracteristiques` VARCHAR(70) NULL,
   `unite_usage` VARCHAR(10) NULL,
-  `module_id` INT NOT NULL,
-  `module_plan_id` INT NOT NULL,
-  `module_plan_projet_id` INT NOT NULL,
-  `module_plan_projet_commercial_id` INT NOT NULL,
-  `module_plan_projet_client_id` INT NOT NULL,
-  `module_plan_projet_client_commercial_id` INT NOT NULL,
-  `module_plan_projet_client_ville_id` INT NOT NULL,
-  `module_plan_devis_id` INT NOT NULL,
-  `module_plan_modele_id` INT NOT NULL,
-  `module_modele_id` INT NOT NULL,
-  `module_modele_coupe_principe_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `module_id`, `module_plan_id`, `module_plan_projet_id`, `module_plan_projet_commercial_id`, `module_plan_projet_client_id`, `module_plan_projet_client_commercial_id`, `module_plan_projet_client_ville_id`, `module_plan_devis_id`, `module_plan_modele_id`, `module_modele_id`, `module_modele_coupe_principe_id`),
-  INDEX `fk_composant_module1_idx` (`module_id` ASC, `module_plan_id` ASC, `module_plan_projet_id` ASC, `module_plan_projet_commercial_id` ASC, `module_plan_projet_client_id` ASC, `module_plan_projet_client_commercial_id` ASC, `module_plan_projet_client_ville_id` ASC, `module_plan_devis_id` ASC, `module_plan_modele_id` ASC, `module_modele_id` ASC, `module_modele_coupe_principe_id` ASC),
-  CONSTRAINT `fk_composant_module1`
-    FOREIGN KEY (`module_id` , `module_plan_id` , `module_plan_projet_id` , `module_plan_projet_commercial_id` , `module_plan_projet_client_id` , `module_plan_projet_client_commercial_id` , `module_plan_projet_client_ville_id` , `module_plan_devis_id` , `module_plan_modele_id` , `module_modele_id` , `module_modele_coupe_principe_id`)
-    REFERENCES `db_madera`.`module` (`id` , `plan_id` , `plan_projet_id` , `plan_projet_commercial_id` , `plan_projet_client_id` , `plan_projet_client_commercial_id` , `plan_projet_client_ville_id` , `plan_devis_id` , `plan_modele_id` , `modele_id` , `modele_coupe_principe_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -313,10 +260,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `db_madera`.`echelonnement_devis` (
   `echelonnement_id` INT NOT NULL,
   `devis_id` INT NOT NULL,
-  `devis_echelonnement_id` INT NOT NULL,
   `date` DATE NULL,
-  PRIMARY KEY (`echelonnement_id`, `devis_id`, `devis_echelonnement_id`),
-  INDEX `fk_echelonnement_has_devis_devis1_idx` (`devis_id` ASC, `devis_echelonnement_id` ASC),
+  PRIMARY KEY (`echelonnement_id`, `devis_id`),
+  INDEX `fk_echelonnement_has_devis_devis1_idx` (`devis_id` ASC),
   INDEX `fk_echelonnement_has_devis_echelonnement1_idx` (`echelonnement_id` ASC),
   CONSTRAINT `fk_echelonnement_has_devis_echelonnement1`
     FOREIGN KEY (`echelonnement_id`)
@@ -324,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `db_madera`.`echelonnement_devis` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_echelonnement_has_devis_devis1`
-    FOREIGN KEY (`devis_id` , `devis_echelonnement_id`)
-    REFERENCES `db_madera`.`devis` (`id` , `echelonnement_id`)
+    FOREIGN KEY (`devis_id`)
+    REFERENCES `db_madera`.`devis` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
