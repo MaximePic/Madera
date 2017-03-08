@@ -93,17 +93,7 @@
 	    _createClass(Login, [{
 	        key: 'render',
 	        value: function render() {
-	            return React.createElement(
-	                'div',
-	                null,
-	                React.createElement('input', { type: 'text', placeholder: 'name', name: 'username' }),
-	                React.createElement('input', { type: 'password', placeholder: 'password', name: 'password' }),
-	                React.createElement(
-	                    'button',
-	                    { type: 'submit' },
-	                    'Login'
-	                )
-	            );
+	            return null;
 	        }
 	    }]);
 	
