@@ -52,12 +52,18 @@
 	
 	var _ProjectList2 = _interopRequireDefault(_ProjectList);
 	
+	var _WelcomeForm = __webpack_require__(240);
+	
+	var _WelcomeForm2 = _interopRequireDefault(_WelcomeForm);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var React = __webpack_require__(3);
 	var ReactDOM = __webpack_require__(89);
 	
 	ReactDOM.render(React.createElement(_ProjectList2.default, null), document.getElementById('projectList'));
+	
+	ReactDOM.render(React.createElement(_WelcomeForm2.default, null), document.getElementById('welcomeForm'));
 
 /***/ },
 /* 1 */
@@ -9282,15 +9288,18 @@
 	    _createClass(ProjectList, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            fetch('/getCommercialProjectList', {
-	                method: 'get',
+	            var _this2 = this;
+	
+	            fetch('/api/getCommercialProjectList', {
+	                method: 'GET',
 	                headers: {
 	                    'Accept': 'application/json',
 	                    'Content-Type': 'application/json'
 	                }
 	            }).then(function (response) {
-	                console.log(response);
-	                console.log(response.json());
+	                return response.json();
+	            }).then(function (projectList) {
+	                _this2.setState({ projectList: projectList });
 	            });
 	        }
 	    }, {
@@ -9303,7 +9312,14 @@
 	                    'div',
 	                    null,
 	                    'Liste des projets: '
-	                )
+	                ),
+	                this.state.projectList.map(function (project) {
+	                    return React.createElement(
+	                        'div',
+	                        { key: project.id },
+	                        project.nom
+	                    );
+	                })
 	            );
 	        }
 	    }]);
@@ -26989,6 +27005,72 @@
 	
 	module.exports = ReactDOMInvalidARIAHook;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(3);
+	
+	function Welcome(props) {
+	    return React.createElement(
+	        'h1',
+	        null,
+	        'Hello, ',
+	        props.name
+	    );
+	}
+	
+	var WelcomeForm = function (_React$Component) {
+	    _inherits(WelcomeForm, _React$Component);
+	
+	    function WelcomeForm() {
+	        _classCallCheck(this, WelcomeForm);
+	
+	        var _this = _possibleConstructorReturn(this, (WelcomeForm.__proto__ || Object.getPrototypeOf(WelcomeForm)).call(this));
+	
+	        _this.state = { name: [] };
+	        return _this;
+	    }
+	
+	    _createClass(WelcomeForm, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            fetch('/api/getUserConnected', {
+	                method: 'GET'
+	            }).then(function (response) {
+	                console.log(response.json());
+	            }).then(function (name) {
+	                _this2.setState({ name: name });
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return React.createElement(Welcome, { name: this.state.name });
+	        }
+	    }]);
+	
+	    return WelcomeForm;
+	}(React.Component);
+	
+	exports.default = WelcomeForm;
 
 /***/ }
 /******/ ]);

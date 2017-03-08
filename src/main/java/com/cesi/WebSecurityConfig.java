@@ -18,6 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http
                 .authorizeRequests()
                     .antMatchers("/built/**", "/css/**").permitAll()
+                    //Attention, permet des appels rest meme si l'utilisateur n'est pas authentifié, à enlever !
+                    .antMatchers("/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -36,6 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-                .withUser("root").password("root").roles("USER");
+                .withUser("root").password("root").roles("ADMIN");
     }
 }

@@ -11,23 +11,23 @@ class ProjectList extends React.Component{
     }
 
     componentDidMount() {
-        fetch(`/getCommercialProjectList`,
+        fetch(`/api/getCommercialProjectList`,
             {
-                method: 'get',
+                method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                },
-            })
-            .then(function (response) {
-                console.log(response);
-                console.log(response.json())
+                }
+            }).then(response => response.json())
+            .then(projectList => {
+                this.setState({projectList});
             });
     }
     render(){
         return(
             <div>
                 <div>Liste des projets: </div>
+                {this.state.projectList.map(project=> {return <div key={project.id}>{project.nom}</div>})}
             </div>
         )
     }

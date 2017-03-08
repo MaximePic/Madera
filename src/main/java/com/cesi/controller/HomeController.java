@@ -28,8 +28,8 @@ public class HomeController {
     private String commercialConnected;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelMap model, HttpServletResponse response) throws IOException {
-        commercialConnected = getUserConnected(model);
+    public ModelAndView index(ModelMap model) throws IOException {
+        commercialConnected = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("index");
         return mav;
     }
@@ -39,25 +39,20 @@ public class HomeController {
      * Méthode permettant de récupérer la liste des projets su commercial qui se connecte à l'application
      * @return
      */
-    @RequestMapping(value = "/getCommercialProjectList")
+    @RequestMapping(value = "/api/getCommercialProjectList", method = RequestMethod.GET)
     public List<Projet> getCommercialProjectList(){
         Commercial commercial = commercialRepository.findByLogin(commercialConnected);
         Long id = commercial.getId();
         List<Projet> commercialProjectList = projetRepository.findByCommercialId(id);
-        System.out.println(commercialProjectList);
         return  commercialProjectList;
     }
 
-
     /**
      * Méthode permettant de récupérer l'utilisateur connecté
-     * @param model
      * @return
      */
-    private String getUserConnected(ModelMap model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        return name;
+    @RequestMapping(value = "/api/getUserConnected", method = RequestMethod.GET)
+    public String getUserConnected(){
+        return commercialConnected;
     }
-
 }
