@@ -7,13 +7,17 @@ import com.cesi.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
-@Controller
+@RestController
 public class HomeController {
     @Autowired
     private CommercialRepository commercialRepository;
@@ -21,20 +25,30 @@ public class HomeController {
     @Autowired
     private ProjetRepository projetRepository;
 
-    @RequestMapping(value = "/")
-    public String index(ModelMap model) {
-        String name = getUserConnected(model);
-        System.out.println(getCommercialProjectList(name));
-        return "index";
+    private String commercialConnected;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView index(ModelMap model, HttpServletResponse response) throws IOException {
+        commercialConnected = getUserConnected(model);
+        ModelAndView mav = new ModelAndView("index");
+        return mav;
     }
 
 
-    public List<Projet> getCommercialProjectList(String login){
-        Commercial commercial = commercialRepository.findByLogin(login);
+    /**
+     * Méthode permettant de récupérer la liste des projets su commercial qui se connecte à l'application
+     * @return
+     */
+    @RequestMapping(value = "/getCommercialProjectList")
+    public List<Projet> getCommercialProjectList(){
+        Commercial commercial = commercialRepository.findByLogin(commercialConnected);
         Long id = commercial.getId();
         List<Projet> commercialProjectList = projetRepository.findByCommercialId(id);
+        System.out.println(commercialProjectList);
         return  commercialProjectList;
     }
+
+
     /**
      * Méthode permettant de récupérer l'utilisateur connecté
      * @param model
@@ -43,8 +57,6 @@ public class HomeController {
     private String getUserConnected(ModelMap model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        model.addAttribute("userConnected", name);
-        System.out.println("user connected: " + name);
         return name;
     }
 

@@ -3,11 +3,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-import Login from './components/Login.js'
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
-//Composant Login dans login.html
+import ProjectList from './components/ProjectList.js'
+
+
 ReactDOM.render(
-    <Login />,
-    document.getElementById('loginForm')
+    <ProjectList/>,
+    document.getElementById('projectList')
 );
