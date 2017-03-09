@@ -9385,19 +9385,16 @@
 	function ProjectData(props) {
 	    var label = "";
 	    switch (props.label) {
-	        case projectConstants.ID:
-	            label = projectConstants.PROJECT_ID_FR;
-	            break;
-	        case projectConstants.NAME:
+	        case "0":
 	            label = projectConstants.PROJECT_NAME_FR;
 	            break;
-	        case projectConstants.CREATION_DATE:
+	        case "1":
 	            label = projectConstants.CREATION_DATE_FR;
 	            break;
-	        case projectConstants.COMMERCIAL_ID:
+	        case "2":
 	            label = projectConstants.COMMERCIAL_FR;
 	            break;
-	        case projectConstants.CLIENT_ID:
+	        case "3":
 	            label = projectConstants.CLIENT_FR;
 	            break;
 	        default:
@@ -9432,10 +9429,10 @@
 	  value: true
 	});
 	var ID = exports.ID = "id";
-	var NAME = exports.NAME = "name";
+	var NAME = exports.NAME = "nom";
 	var CREATION_DATE = exports.CREATION_DATE = "date_creation";
 	var COMMERCIAL_ID = exports.COMMERCIAL_ID = "commercialId";
-	var CLIENT_ID = exports.CLIENT_ID = "client_id";
+	var CLIENT_ID = exports.CLIENT_ID = "clientId";
 	var PROJECT_ID_FR = exports.PROJECT_ID_FR = "Identifiant du projet";
 	var PROJECT_NAME_FR = exports.PROJECT_NAME_FR = 'Nom du projet';
 	var CREATION_DATE_FR = exports.CREATION_DATE_FR = 'Date de création';

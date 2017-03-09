@@ -14,22 +14,29 @@ import java.util.Date;
 @Data
 public class Projet {
     private @Id Long id;
+    
     private String nom;
-    private Date date_creation;
+
+    @Column(name="date_creation")
+    private Date dateCreation;
+    
     @Column(name = "commercial_id")
     private Long commercialId;
-    private Long client_id;
+    
+    @Column(name="client_id")
+
+    private Long clientId;
     private Long commercial_client_id;
     private Long client_ville_id;
 
     private Projet(){}
 
-    public Projet(Long id, String nom, Date date_creation, Long commercialId, Long client_id, Long commercial_client_id, Long client_ville_id) {
+    public Projet(Long id, String nom, Date dateCreation, Long commercialId, Long clientId, Long commercial_client_id, Long client_ville_id) {
         this.id = id;
         this.nom = nom;
-        this.date_creation = date_creation;
+        this.dateCreation = dateCreation;
         this.commercialId = commercialId;
-        this.client_id = client_id;
+        this.clientId = clientId;
         this.commercial_client_id = commercial_client_id;
         this.client_ville_id = client_ville_id;
     }
@@ -51,11 +58,11 @@ public class Projet {
     }
 
     public Date getDate_creation() {
-        return date_creation;
+        return dateCreation;
     }
 
     public void setDate_creation(Date date_creation) {
-        this.date_creation = date_creation;
+        this.dateCreation = date_creation;
     }
 
     public Long getCommercial_id() {
@@ -67,11 +74,11 @@ public class Projet {
     }
 
     public Long getClient_id() {
-        return client_id;
+        return clientId;
     }
 
     public void setClient_id(Long client_id) {
-        this.client_id = client_id;
+        this.clientId = client_id;
     }
 
     public Long getCommercial_client_id() {

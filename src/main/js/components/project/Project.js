@@ -24,19 +24,16 @@ class Project extends React.Component{
 function ProjectData(props){
     var label = "";
     switch (props.label){
-        case projectConstants.ID:
-            label = projectConstants.PROJECT_ID_FR;
-            break;
-        case projectConstants.NAME:
+        case "0":
             label = projectConstants.PROJECT_NAME_FR;
             break;
-        case projectConstants.CREATION_DATE:
+        case "1":
             label = projectConstants.CREATION_DATE_FR;
             break;
-        case projectConstants.COMMERCIAL_ID:
+        case "2":
             label = projectConstants.COMMERCIAL_FR;
             break;
-        case projectConstants.CLIENT_ID:
+        case "3":
             label = projectConstants.CLIENT_FR;
             break;
         default:
