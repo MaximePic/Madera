@@ -1,0 +1,11 @@
+export const ID = "id";
+export const NAME = "name";
+export const CREATION_DATE = "date_creation";
+export const COMMERCIAL_ID = "commercialId";
+export const CLIENT_ID = "client_id";
+export const PROJECT_ID_FR = "Identifiant du projet";
+export const PROJECT_NAME_FR = 'Nom du projet';
+export const CREATION_DATE_FR = 'Date de création';
+export const COMMERCIAL_FR = 'Commercial';
+export const CLIENT_FR = 'Client';
+export const NULL = 'Null';

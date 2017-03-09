@@ -3,6 +3,7 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+import Project from './Project'
 
 class ProjectList extends React.Component{
     constructor() {
@@ -27,7 +28,9 @@ class ProjectList extends React.Component{
         return(
             <div>
                 <div>Liste des projets: </div>
-                {this.state.projectList.map(project=> {return <div key={project.id}>{project.nom}</div>})}
+                {this.state.projectList.map(project=> {
+                    return <Project key={project.id} project={project}/>
+                })}
             </div>
         )
     }

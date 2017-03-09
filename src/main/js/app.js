@@ -5,7 +5,7 @@ const ReactDOM = require('react-dom');
 
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 
-import ProjectList from './components/ProjectList.js'
+import ProjectList from './components/project/ProjectList.js'
 
 
 ReactDOM.render(
