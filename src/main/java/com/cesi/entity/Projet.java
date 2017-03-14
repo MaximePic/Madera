@@ -31,16 +31,7 @@ public class Projet {
 
     private Projet(){}
 
-    public Projet(Long id, String nom, Date dateCreation, Long commercialId, Long clientId, Long commercial_client_id, Long client_ville_id) {
-        this.id = id;
-        this.nom = nom;
-        this.dateCreation = dateCreation;
-        this.commercialId = commercialId;
-        this.clientId = clientId;
-        this.commercial_client_id = commercial_client_id;
-        this.client_ville_id = client_ville_id;
-    }
-
+    /***************GETTERS AND SETTERS***************/
     public Long getId() {
         return id;
     }

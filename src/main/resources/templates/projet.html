@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="fr">
-
     <meta charset="UTF-8"/>
-    <title>Madera</title>
+    <title>Liste des devis</title>
     <link rel="stylesheet" href="/css/main.css" />
 </head>
-  <body>
+<body>
     <div>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Log Out"/>
         </form>
     </div>
 
-    <div id="projectList"></div>
-    <script src="built/bundle.js"></script>
-  </body>
+    <div id="devisList"></div>
+    <script src="../built/bundle.js"></script>
+</body>
 </html>

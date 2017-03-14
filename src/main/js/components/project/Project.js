@@ -5,15 +5,12 @@ const ReactDOM = require('react-dom');
 
 import * as projectConstants from '../../../resources/utils/projectConstants.js'
 
-
 class Project extends React.Component{
 
     render(){
-        console.log();
         return(
             <div className="project">
                 {Object.keys(this.props.project).map(data=>{
-                    console.log(data);
                     return <ProjectData label={data} values={this.props.project[data]} index={arguments[1]}/>
                 })}
             </div>

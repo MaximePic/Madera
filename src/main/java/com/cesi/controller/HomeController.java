@@ -5,7 +5,6 @@ import com.cesi.entity.Projet;
 import com.cesi.repository.CommercialRepository;
 import com.cesi.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class HomeController {
     private String commercialConnected;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelMap model) throws IOException {
+    public ModelAndView index() throws IOException {
         commercialConnected = SecurityContextHolder.getContext().getAuthentication().getName();
         ModelAndView mav = new ModelAndView("index");
         return mav;

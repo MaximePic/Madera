@@ -1,5 +1,7 @@
 package com.cesi.model;
 
+import com.cesi.entity.Commercial;
+
 import java.util.Date;
 
 /**
