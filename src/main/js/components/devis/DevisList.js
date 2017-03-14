@@ -4,6 +4,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 import Devis from  './Devis.js'
+import * as dateConverter from '../../../resources/utils/dateConverter.js'
 
 class DevisList extends React.Component{
     constructor() {
@@ -29,6 +30,8 @@ class DevisList extends React.Component{
             <div>
                 <div>Liste des devis: </div>
                 {this.state.devisList.map(devis=> {
+                    //Convertion de la date en format JSON
+                    devis[1] = dateConverter.convertDate(devis[1]);
                     return <Devis key={devis.id} devis={devis}/>
                 })}
             </div>

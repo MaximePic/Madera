@@ -50,7 +50,7 @@
 	
 	var _ProjectList2 = _interopRequireDefault(_ProjectList);
 	
-	var _DevisList = __webpack_require__(186);
+	var _DevisList = __webpack_require__(187);
 	
 	var _DevisList2 = _interopRequireDefault(_DevisList);
 	
@@ -85,6 +85,12 @@
 	var _Project = __webpack_require__(2);
 	
 	var _Project2 = _interopRequireDefault(_Project);
+	
+	var _dateConverter = __webpack_require__(186);
+	
+	var dateConverter = _interopRequireWildcard(_dateConverter);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -138,6 +144,8 @@
 	                    'Liste des projets: '
 	                ),
 	                this.state.projectList.map(function (project) {
+	                    //Convertion de la date en format JSON
+	                    project[1] = dateConverter.convertDate(project[1]);
 	                    return React.createElement(_Project2.default, { key: project.id, project: project });
 	                })
 	            );
@@ -22006,6 +22014,26 @@
 
 /***/ },
 /* 186 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Fonction permettant de convertir une date de Timestamp au format JSON
+	 */
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.convertDate = convertDate;
+	function convertDate(date) {
+	    var date = new Date(date);
+	    var formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+	    return formattedDate;
+	}
+
+/***/ },
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22016,9 +22044,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _Devis = __webpack_require__(187);
+	var _Devis = __webpack_require__(188);
 	
 	var _Devis2 = _interopRequireDefault(_Devis);
+	
+	var _dateConverter = __webpack_require__(186);
+	
+	var dateConverter = _interopRequireWildcard(_dateConverter);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22072,6 +22106,8 @@
 	                    'Liste des devis: '
 	                ),
 	                this.state.devisList.map(function (devis) {
+	                    //Convertion de la date en format JSON
+	                    devis[1] = dateConverter.convertDate(devis[1]);
 	                    return React.createElement(_Devis2.default, { key: devis.id, devis: devis });
 	                })
 	            );
@@ -22084,7 +22120,7 @@
 	exports.default = DevisList;
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22095,7 +22131,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _devisConstants = __webpack_require__(188);
+	var _devisConstants = __webpack_require__(189);
 	
 	var devisConstants = _interopRequireWildcard(_devisConstants);
 	
@@ -22184,7 +22220,7 @@
 	exports.default = Devis;
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports) {
 
 	'use strict';

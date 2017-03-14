@@ -4,6 +4,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 import Project from './Project'
+import * as dateConverter from '../../../resources/utils/dateConverter.js'
 
 class ProjectList extends React.Component{
     constructor() {
@@ -29,6 +30,8 @@ class ProjectList extends React.Component{
             <div>
                 <div>Liste des projets: </div>
                 {this.state.projectList.map(project=> {
+                    //Convertion de la date en format JSON
+                    project[1] = dateConverter.convertDate(project[1]);
                     return <Project key={project.id} project={project}/>
                 })}
             </div>
