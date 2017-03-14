@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface ProjetRepository extends CrudRepository<Projet, Long> {
-    @Query("SELECT p.nom , p.dateCreation, p.commercialId, p.clientId  FROM Projet p where p.commercialId = :id")
+    @Query("SELECT p.nom , p.dateCreation, p.commercialId, p.clientId, p.id  FROM Projet p where p.commercialId = :id")
     List<Projet> findByCommercialId(@Param("id")Long id);
 }

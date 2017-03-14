@@ -9397,24 +9397,35 @@
 	        case "3":
 	            label = projectConstants.CLIENT_FR;
 	            break;
+	        case "4":
+	            label = projectConstants.ID;
+	            break;
 	        default:
 	            label = projectConstants.NULL;
 	            break;
 	    }
-	    return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	            'div',
-	            { className: 'projectLabel' },
-	            label
-	        ),
-	        React.createElement(
+	    if (label !== projectConstants.ID) {
+	        return React.createElement(
 	            'div',
 	            null,
-	            props.values
-	        )
-	    );
+	            React.createElement(
+	                'div',
+	                { className: 'projectLabel' },
+	                label
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
+	                props.values
+	            )
+	        );
+	    } else {
+	        return React.createElement(
+	            'a',
+	            { href: '/projet/' + props.values },
+	            'Voir le projet'
+	        );
+	    }
 	}
 	
 	exports.default = Project;

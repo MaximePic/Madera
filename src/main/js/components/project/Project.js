@@ -36,16 +36,25 @@ function ProjectData(props){
         case "3":
             label = projectConstants.CLIENT_FR;
             break;
+        case "4":
+            label = projectConstants.ID;
+            break;
         default:
             label = projectConstants.NULL;
             break;
     }
-    return (
-        <div>
-            <div className="projectLabel">{label}</div>
-            <div>{props.values}</div>
-        </div>
-    )
+    if(label !== projectConstants.ID) {
+        return (
+            <div>
+                <div className="projectLabel">{label}</div>
+                <div>{props.values}</div>
+            </div>
+        )
+    }else{
+        return(
+            <a href={'/projet/' + props.values}>Voir le projet</a>
+        )
+    }
 }
 
 export default Project;
