@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
- * Created by maxime on 14/03/17.
+ * Controller du Projet
  */
 @RestController
 public class ProjetController {
@@ -24,6 +23,12 @@ public class ProjetController {
 
     private Long projetId;
 
+    /**
+     * Redirection sur la page de détail de projet (projet.html)
+     * @param id
+     * @param httpServletRequest
+     * @return
+     */
     @RequestMapping(value = "/projet/{id}", method = RequestMethod.GET)
     public ModelAndView showProject(@PathVariable ("id") Long id, HttpServletRequest httpServletRequest){
         projetId = id;
