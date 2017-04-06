@@ -15,4 +15,6 @@ import java.util.List;
 public interface DevisRepository extends CrudRepository<Devis, Long>{
     @Query("SELECT d.nom , d.dateCreation, d.etat, d.id FROM Devis d where d.projetId = :id")
     List<Devis> findByProjetId(@Param("id")Long id);
+
+    Devis findById(Long id);
 }

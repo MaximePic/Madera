@@ -46,7 +46,10 @@ function DevisData(props){
         )
     }else{
         return(
-            <a href={'/devis/' + props.values}>Voir le devis</a>
+            <div>
+                <a href={'/devis/' + props.values + '?mode=view'}>Voir le devis</a>
+                <a href={'/devis/' + props.values + '?mode=edit'}>Editer le devis</a>
+            </div>
         )
     }
 }

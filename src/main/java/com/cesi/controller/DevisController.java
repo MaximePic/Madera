@@ -1,10 +1,10 @@
 package com.cesi.controller;
 
+import com.cesi.entity.Devis;
+import com.cesi.repository.DevisRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class DevisController {
+
+    @Autowired
+    private DevisRepository devisRepository;
 
     private Long devisId;
 
@@ -25,5 +28,16 @@ public class DevisController {
         devisId = id;
         ModelAndView mav = new ModelAndView("devis");
         return mav;
+    }
+
+    @RequestMapping(value = "/api/getDevisDetails", method = RequestMethod.GET)
+    public Devis getDevisDetails(){
+        Devis devis = devisRepository.findById(devisId);
+        return devis;
+    }
+
+    @RequestMapping(value = "/api/saveDevisDetails", method = RequestMethod.POST)
+    public void saveDevisDetails(@RequestBody Devis devis){
+        devisRepository.save(devis);
     }
 }
